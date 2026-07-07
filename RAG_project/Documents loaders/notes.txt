@@ -1,0 +1,547 @@
+===========================================
+RAG PROJECT NOTES
+===========================================
+
+Project:
+Retrieval-Augmented Generation (RAG) using LangChain + Mistral AI + ChromaDB
+
+-------------------------------------------
+1. What is RAG?
+-------------------------------------------
+
+RAG (Retrieval-Augmented Generation) is a technique that allows an LLM to answer questions using your own documents instead of relying only on its training data.
+
+Flow:
+
+User Question
+      ↓
+Embedding Model
+      ↓
+Vector Database (ChromaDB)
+      ↓
+Relevant Chunks Retrieved
+      ↓
+LLM (Mistral)
+      ↓
+Final Answer
+
+-------------------------------------------
+2. Project Structure
+-------------------------------------------
+
+RAG_Project/
+
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── data/
+│     ├── pdfs/
+│     ├── docs/
+│     ├── csv/
+│     ├── images/
+│     └── websites/
+│
+├── database/
+│     └── chroma_db/
+│
+├── loaders/
+├── embeddings/
+├── vectorstore/
+├── retriever/
+├── prompts/
+├── chains/
+├── utils/
+└── README.md
+
+-------------------------------------------
+3. Main Components
+-------------------------------------------
+
+1. Document Loader
+2. Text Splitter
+3. Embedding Model
+4. Vector Database
+5. Retriever
+6. Prompt
+7. LLM
+8. Response Generator
+
+-------------------------------------------
+4. Document Loaders
+-------------------------------------------
+
+PDF
+PyPDFLoader
+
+Word
+Docx2txtLoader
+
+CSV
+CSVLoader
+
+Text
+TextLoader
+
+Websites
+WebBaseLoader
+
+Directory
+DirectoryLoader
+
+Images
+OCR (Pytesseract)
+
+-------------------------------------------
+5. Text Splitters
+-------------------------------------------
+
+RecursiveCharacterTextSplitter (Most Used)
+
+Example:
+
+Chunk Size:
+1000
+
+Chunk Overlap:
+200
+
+Purpose:
+
+Large documents
+↓
+
+Small Chunks
+↓
+
+Embedding
+
+-------------------------------------------
+6. Embeddings
+-------------------------------------------
+
+Convert text into vectors.
+
+Popular Models
+
+sentence-transformers/all-MiniLM-L6-v2
+
+BAAI/bge-small-en-v1.5
+
+all-mpnet-base-v2
+
+-------------------------------------------
+7. Vector Database
+-------------------------------------------
+
+Store vectors for similarity search.
+
+Popular Vector DBs
+
+ChromaDB
+FAISS
+Pinecone
+Qdrant
+Milvus
+Weaviate
+
+Current Project:
+
+ChromaDB
+
+-------------------------------------------
+8. Retrieval
+-------------------------------------------
+
+Question
+↓
+
+Convert to Embedding
+↓
+
+Similarity Search
+↓
+
+Top K Chunks
+↓
+
+Pass to LLM
+
+Common Parameters
+
+k = 3
+k = 5
+k = 10
+
+-------------------------------------------
+9. LLM
+-------------------------------------------
+
+Current Model
+
+Mistral
+
+Can be replaced with
+
+OpenAI
+Gemini
+Claude
+Llama
+Groq
+Ollama
+
+-------------------------------------------
+10. LangChain Flow
+-------------------------------------------
+
+Load Documents
+↓
+
+Split Documents
+↓
+
+Create Embeddings
+↓
+
+Store in ChromaDB
+↓
+
+Create Retriever
+↓
+
+Connect LLM
+↓
+
+Create RAG Chain
+↓
+
+Ask Questions
+
+-------------------------------------------
+11. Important Packages
+-------------------------------------------
+
+langchain
+
+langchain-community
+
+langchain-core
+
+langchain-text-splitters
+
+langchain-chroma
+
+langchain-huggingface
+
+langchain-mistralai
+
+chromadb
+
+sentence-transformers
+
+torch
+
+pypdf
+
+python-docx
+
+unstructured
+
+python-dotenv
+
+tiktoken
+
+streamlit
+
+-------------------------------------------
+12. Common Functions
+-------------------------------------------
+
+Load Documents
+
+Split Documents
+
+Generate Embeddings
+
+Create Vector Store
+
+Persist Database
+
+Load Existing Database
+
+Similarity Search
+
+Retriever
+
+Prompt Template
+
+Invoke LLM
+
+-------------------------------------------
+13. Environment Variables
+-------------------------------------------
+
+.env
+
+MISTRAL_API_KEY=your_api_key
+
+-------------------------------------------
+14. ChromaDB
+-------------------------------------------
+
+Create DB
+
+Add Documents
+
+Persist
+
+Load Existing DB
+
+Similarity Search
+
+Delete Collection
+
+-------------------------------------------
+15. Retriever Types
+-------------------------------------------
+
+Similarity
+
+MMR
+
+Similarity Score Threshold
+
+-------------------------------------------
+16. Prompt Template
+-------------------------------------------
+
+Always include:
+
+System Prompt
+
+Context
+
+User Question
+
+Instructions
+
+Example:
+
+Answer only from the provided context.
+
+If the answer is not found, say:
+
+"I don't know."
+
+-------------------------------------------
+17. Project Workflow
+-------------------------------------------
+
+Step 1
+
+Load Documents
+
+↓
+
+Step 2
+
+Split into Chunks
+
+↓
+
+Step 3
+
+Generate Embeddings
+
+↓
+
+Step 4
+
+Store in ChromaDB
+
+↓
+
+Step 5
+
+Retrieve Similar Chunks
+
+↓
+
+Step 6
+
+Send Context to Mistral
+
+↓
+
+Step 7
+
+Generate Answer
+
+-------------------------------------------
+18. Folder Responsibilities
+-------------------------------------------
+
+loaders/
+Document loading
+
+embeddings/
+Embedding model
+
+vectorstore/
+Database creation
+
+retriever/
+Searching documents
+
+chains/
+RAG chain
+
+prompts/
+Prompt templates
+
+utils/
+Helper functions
+
+-------------------------------------------
+19. Common Errors
+-------------------------------------------
+
+No module named langchain_community
+
+→ Install langchain-community
+
+----------------
+
+No module named langchain_chroma
+
+→ Install langchain-chroma
+
+----------------
+
+No module named chromadb
+
+→ Install chromadb
+
+----------------
+
+No module named sentence_transformers
+
+→ Install sentence-transformers
+
+----------------
+
+No module named pypdf
+
+→ Install pypdf
+
+----------------
+
+No module named torch
+
+→ Install torch
+
+----------------
+
+API Key Error
+
+→ Check .env file
+
+----------------
+
+Empty Retrieval
+
+→ Documents not embedded
+→ Wrong collection
+→ Wrong persist directory
+
+-------------------------------------------
+20. Best Practices
+-------------------------------------------
+
+✔ Use RecursiveCharacterTextSplitter
+
+✔ Chunk Size = 800–1200
+
+✔ Chunk Overlap = 150–250
+
+✔ Store ChromaDB persistently
+
+✔ Cache embeddings
+
+✔ Use .env for API keys
+
+✔ Keep prompt simple
+
+✔ Return source documents
+
+✔ Log errors
+
+✔ Validate uploaded files
+
+-------------------------------------------
+21. Future Improvements
+-------------------------------------------
+
+✔ Chat History
+
+✔ Memory
+
+✔ Hybrid Search
+
+✔ Reranking
+
+✔ Multi Query Retrieval
+
+✔ Parent Document Retriever
+
+✔ Self Query Retriever
+
+✔ Metadata Filtering
+
+✔ Image Retrieval
+
+✔ OCR Support
+
+✔ Multiple File Upload
+
+✔ Streaming Responses
+
+✔ Citation Generation
+
+✔ Authentication
+
+✔ FastAPI Backend
+
+✔ Streamlit Frontend
+
+-------------------------------------------
+22. Learning Order
+-------------------------------------------
+
+1. LangChain Basics
+
+2. Document Loaders
+
+3. Text Splitters
+
+4. Embeddings
+
+5. ChromaDB
+
+6. Retriever
+
+7. Prompt Templates
+
+8. Mistral Integration
+
+9. RAG Chains
+
+10. Memory
+
+11. Agents
+
+12. Deployment
+
+===========================================
+END OF NOTES
+===========================================

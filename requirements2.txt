@@ -1,0 +1,119 @@
+# ============================
+# LangChain
+# ============================
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-chroma
+langchain-huggingface
+langchain-mistralai
+
+# ============================
+# LLM
+# ============================
+mistralai
+
+# ============================
+# Vector Database
+# ============================
+chromadb
+
+# ============================
+# Embeddings
+# ============================
+sentence-transformers
+torch
+
+# ============================
+# Environment
+# ============================
+python-dotenv
+
+# ============================
+# Document Loaders
+# ============================
+pypdf
+pymupdf
+pdfplumber
+python-docx
+python-pptx
+openpyxl
+unstructured
+
+# ============================
+# Data Processing
+# ============================
+pandas
+numpy
+
+# ============================
+# Web & HTML
+# ============================
+requests
+beautifulsoup4
+lxml
+html5lib
+markdown
+markdownify
+
+# ============================
+# OCR
+# ============================
+Pillow
+pytesseract
+
+# ============================
+# Tokenization
+# ============================
+tiktoken
+
+# ============================
+# API & UI
+# ============================
+fastapi
+uvicorn
+streamlit
+
+# ============================
+# Utilities
+# ============================
+httpx
+tqdm
+tenacity
+loguru
+PyYAML
+orjson
+typing-extensions
+rich
+typer
+
+# ============================
+# Optional Search & Loaders
+# ============================
+duckduckgo-search
+selenium
+playwright
+youtube-transcript-api
+wikipedia
+arxiv
+GitPython
+
+# ============================
+# Optional Vector Databases
+# ============================
+faiss-cpu
+pinecone
+qdrant-client
+weaviate-client
+pymilvus
+redis
+pymongo
+psycopg2-binary
+
+# ============================
+# Image & Audio AI (Optional)
+# ============================
+transformers
+openai-whisper
+SpeechRecognition
