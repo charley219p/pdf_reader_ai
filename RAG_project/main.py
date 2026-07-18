@@ -18,6 +18,7 @@ retriever = vectorstore.as_retriever(
         "lambda_mult":0.5
     }
 )
+print(vectorstore._collection.count())
 llm = ChatMistralAI(model_name = "mistral-small-latest")
 
 prompt = ChatPromptTemplate.from_messages(
